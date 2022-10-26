@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本使用</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{msg}}</h1>
+        <!-- 第三步：编写组件标签 -->
+        <!-- <xuexiao></xuexiao> -->
+        <school></school>
+        <hello></hello>
+        <hr />
+        <!-- 第三步：编写组件标签 -->
+        <!-- <xuesheng></xuesheng>
+        <xuesheng></xuesheng> -->
+        <student></student>
+        <student></student><br/>
+
+    </div>
+
+
+    <div id="root2">
+        <hello></hello>
+    </div>
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+
+    //第一步，创建school组件
+    const school = Vue.extend({
+        //el:'#root',   组件定义时，一定不要写el配置项，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器
+        template: `
+        <div>
+            <h2>学校名称：{{schoolName}}</h2>
+            <h2>学校地址：{{address}}</h2>
+            <button @click="showName">点我提示学校名称</button>
+            </div>
+            `,
+        data() {
+            return {
+                schoolName: 'DF',
+                address: 'China'
+
+            }
+        },
+        methods: {
+            showName() {
+                alert(this.schoolName)
+            }
+        }
+    })
+
+    //第一步，创建student组件
+    const student = Vue.extend({
+        template: `
+        <div>
+            <h2>学生姓名：{{studentName}}</h2>
+            <h2>学生年龄：{{age}}</h2>
+            </div>
+            `,
+        data() {
+            return {
+                studentName: 'DFshmily',
+                age: 18
+            }
+        }
+    })
+
+    //第一步，创建hello组件
+    const hello = Vue.extend({
+        template:`
+        <div>
+            <h2>你好呀！{{name}}</h2>
+            </div>
+            `,
+        data(){
+            return {
+                name:'我是全局组件'
+            }
+        }
+    })
+
+    //第二步，全局注册
+    Vue.component('hello',hello)
+
+    //创建vm
+    new Vue({
+        el: '#root',
+        data:{
+            msg:'你好呀！'
+        },    
+        //注册组件（局部注册）
+        components: {
+            // xuexiao: school,
+            // xuesheng: student
+            school,
+            student
+        }
+    })
+
+    new Vue({
+        el:'#root2',
+        
+    })
+</script>
+
+</html>

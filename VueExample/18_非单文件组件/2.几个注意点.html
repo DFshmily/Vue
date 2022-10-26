@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>几个注意点</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>{{msg}}</h1>
+        <school></school>
+    </div>
+</body>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    //定义组件
+    const s = Vue.extend({
+        name:'DD',
+        template:`
+        <div>
+            <h2>学校名称：{{schoolName}}</h2>
+            <h2>学校地址：{{address}}</h2>
+            </div>
+        `,
+        data(){
+            return {
+                schoolName: 'DF',
+                address: 'China'
+
+            }
+        }
+    })
+
+    new Vue({
+        el:'#root',
+        data:{
+            msg:'欢迎学习Vue!'
+        },
+        components:{
+            school:s
+        }
+    })
+</script>
+
+</html>

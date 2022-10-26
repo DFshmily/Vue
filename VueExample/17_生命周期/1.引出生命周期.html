@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>引出生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">欢迎学习Vue</h2>
+        
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        // 一般做法，占用内存
+        // const vm = new Vue({
+        //     el:'#root',
+        //     data:{
+        //         opacity:1
+        //     }
+        // })
+
+        // setInterval(() =>{
+        //         vm.opacity -= 0.01
+        //         if(vm.opacity <=0)
+        //             vm.opacity = 1
+        //     },16)
+
+        new Vue({
+            el: '#root',
+            data: {
+                opacity: 1
+            },
+            methods: {
+               
+            },
+            //Vue完成模板的解析并把初始的真实DOM元素放入页面后（完成挂载）调用mounted
+            mounted() {
+                console.log('mounted')
+                setInterval(() => {
+                        this.opacity -= 0.01
+                        if (this.opacity <= 0)
+                        this.opacity = 1
+                    }, 16)
+            },
+        })
+        //通过外部的定时器实现（不推荐），16代表ms，即每16ms执行一次
+        /* change() {
+        setInterval(() => {
+                        this.opacity -= 0.01
+                        if (this.opacity <= 0)
+                        this.opacity = 1
+                    }, 16)
+                }*/
+    </script>
+</body>
+
+</html>
